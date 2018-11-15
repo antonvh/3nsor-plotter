@@ -919,8 +919,7 @@ class RopePlotter(object):
                 self.chalk_motor.run_forever(speed_sp=150)
                 if self.chalk_motor.position > 20552:
                     self.reload_chalk()
-
-        self.chalk_motor.stop()
+            self.chalk_motor.stop()
 
     def left_fwd(self):
         self.left_motor.run_direct(duty_cycle_sp=100)
