@@ -2,3 +2,4 @@ ev3dev/*
 BrickPi.py
 .ipynb_checkpoints
 *.psd
+.vscode/settings.json
