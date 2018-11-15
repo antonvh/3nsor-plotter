@@ -181,16 +181,28 @@ def wsSend(message):
         ws.write_message(message)
 
 
-application = tornado.web.Application([
-    (r'/ws', WSHandler),
-    (r'/', MainHandler),
-    (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "./static"}),
-    (r"/css/(.*)", tornado.web.StaticFileHandler, {"path": "./css"}),
-    (r"/fonts/(.*)", tornado.web.StaticFileHandler, {"path": "./fonts"}),
-    (r"/uploads/(.*)", tornado.web.StaticFileHandler, {"path": "./uploads"}),
-    (r"/logs/(.*)", tornado.web.StaticFileHandler, {"path": "./logs"}),
-    (r"/upload", UploadHandler)
-])
+def make_app():
+    return tornado.web.Application([
+        (r'/ws', WSHandler),
+        (r'/', MainHandler),
+        (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "./static"}),
+        (r"/css/(.*)", tornado.web.StaticFileHandler, {"path": "./css"}),
+        (r"/fonts/(.*)", tornado.web.StaticFileHandler, {"path": "./fonts"}),
+        (r"/uploads/(.*)", tornado.web.StaticFileHandler, {"path": "./uploads"}),
+        (r"/logs/(.*)", tornado.web.StaticFileHandler, {"path": "./logs"}),
+        (r"/upload", UploadHandler)
+    ])
+
+# application = tornado.web.Application([
+#     (r'/ws', WSHandler),
+#     (r'/', MainHandler),
+#     (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "./static"}),
+#     (r"/css/(.*)", tornado.web.StaticFileHandler, {"path": "./css"}),
+#     (r"/fonts/(.*)", tornado.web.StaticFileHandler, {"path": "./fonts"}),
+#     (r"/uploads/(.*)", tornado.web.StaticFileHandler, {"path": "./uploads"}),
+#     (r"/logs/(.*)", tornado.web.StaticFileHandler, {"path": "./logs"}),
+#     (r"/upload", UploadHandler)
+# ])
 
 
 class MotorThread(threading.Thread):
@@ -378,14 +390,15 @@ if __name__ == "__main__":
     lcd.image.paste(img.rotate(-90), box=(0, 0))
 
     # Set up web server
-    application.listen(9093)  # starts the web sockets connection
+    app = make_app()
+    app.listen(9093)
     logging.info("Started web server at {0}:9093".format(get_ip_address()))
 
     # Display ip number on screen for easy connection
     lcd.update()
 
     try:
-        tornado.ioloop.IOLoop.instance().start()
+        tornado.ioloop.IOLoop.current().start()
     except KeyboardInterrupt:   # Triggered by pressing Ctrl+C. Time to clean up.
         running = False         # Stop motor thread
         for ws in websockets:   # Close all sockets
