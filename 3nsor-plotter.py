@@ -58,6 +58,8 @@ from PIL import Image, ImageDraw
 import logging
 import time
 import asyncio
+from tornado.platform.asyncio import AnyThreadEventLoopPolicy
+asyncio.set_event_loop_policy(AnyThreadEventLoopPolicy())
 
 # My own stuff
 from ropeplotter import RopePlotter, Throttler, get_ip_address
@@ -194,7 +196,7 @@ def make_app():
         (r"/upload", UploadHandler)
     ])
 
-asyncio.set_event_loop_policy(AnyThreadEventLoopPolicy())
+
 
 # application = tornado.web.Application([
 #     (r'/ws', WSHandler),
