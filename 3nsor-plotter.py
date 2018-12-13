@@ -180,8 +180,11 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
 
 def wsSend(message):
-    for ws in websockets:
-        ws.write_message(message)
+    try:
+        for ws in websockets:
+            ws.write_message(message)
+    except Exception as e:
+        plotter_log.info(str(e))
 
 
 def make_app():
@@ -195,19 +198,6 @@ def make_app():
         (r"/logs/(.*)", tornado.web.StaticFileHandler, {"path": "./logs"}),
         (r"/upload", UploadHandler)
     ])
-
-
-
-# application = tornado.web.Application([
-#     (r'/ws', WSHandler),
-#     (r'/', MainHandler),
-#     (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "./static"}),
-#     (r"/css/(.*)", tornado.web.StaticFileHandler, {"path": "./css"}),
-#     (r"/fonts/(.*)", tornado.web.StaticFileHandler, {"path": "./fonts"}),
-#     (r"/uploads/(.*)", tornado.web.StaticFileHandler, {"path": "./uploads"}),
-#     (r"/logs/(.*)", tornado.web.StaticFileHandler, {"path": "./logs"}),
-#     (r"/upload", UploadHandler)
-# ])
 
 
 class MotorThread(threading.Thread):
