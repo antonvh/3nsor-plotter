@@ -261,6 +261,34 @@ class RopePlotter(object):
         self.move_to_norm_coord(0.3,0.3)
         self.move_to_norm_coord(0.0,0.0)
 
+    def plot_crosses(self, filename):
+        coords = open(filename)
+        num_coords = int(coords.readline())  # coords contains it's length on the first line.
+        self.pen_up()
+        for i in range(num_coords):
+            # drive to the first coordinate
+
+            # read from file
+            x_norm, y_norm = [float(n) for n in coords.readline().split(",")]
+
+            # move
+            self.move_to_norm_coord(x_norm, y_norm)
+            self.pen_down()
+
+            # Wiggle
+            self.left_motor.run
+
+            # read from file
+            x_norm, y_norm = [float(n) for n in coords.readline().split(",")]
+            # move
+            self.move_to_norm_coord(x_norm, y_norm)
+            yield float(i + 1) / num_coords * 100
+
+        coords.close()
+        self.pen_up()
+        self.move_to_norm_coord(0, 0)
+        yield 100
+
     def plot_from_file(self, filename):
         """
         Generator function for plotting from coords.csv file. After each next() it returns the pct done of the plotting
