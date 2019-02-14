@@ -329,6 +329,14 @@ class MotorThread(threading.Thread):
                 # c stays 'plot' until another command is sent trough the socket
                 plot_action = plotter.optimized_etch()
                 c = 'plotting'
+
+            elif c == 'plot_crosses':
+                start_time = time.time()
+                wsSend("Plotting crosses")
+                # c stays 'plot' until another command is sent trough the socket
+                plot_action = plotter.plot_crosses()
+                c = 'plotting'
+
             elif c == 'plotwaves':
                 wsSend("Plotting waves")
                 # c stays 'plot' until another command is sent trough the socket

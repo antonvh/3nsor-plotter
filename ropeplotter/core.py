@@ -276,12 +276,14 @@ class RopePlotter(object):
             self.pen_down()
 
             # Wiggle
-            self.left_motor.run
+            self.left_motor.run_to_rel_pos(position_sp=120)
+            self.pen_up()
+            self.left_motor.run_to_rel_pos(position_sp=-60)
+            self.right_motor.run_to_rel_pos(position_sp=-60)
+            self.pen_down()
+            self.right_motor.run_to_rel_pos(position_sp=120)
+            self.pen_up()
 
-            # read from file
-            x_norm, y_norm = [float(n) for n in coords.readline().split(",")]
-            # move
-            self.move_to_norm_coord(x_norm, y_norm)
             yield float(i + 1) / num_coords * 100
 
         coords.close()

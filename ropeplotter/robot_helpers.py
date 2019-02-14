@@ -253,3 +253,16 @@ class PIDMotor(ev3.Motor):
             self.run()
 
         self.stop()
+
+    def run_to_rel_pos(self, position_sp=None):
+        if position_sp is not None:
+            self.positionPID.set_point = self.positionPID.current + position_sp
+        while not self.positionPID.target_reached:
+            self.run()
+
+        t_end = time.time() + self.brake
+        while time.time() < t_end:
+            #print "Braking"
+            self.run()
+
+        self.stop()
