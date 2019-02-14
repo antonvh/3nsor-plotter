@@ -44,6 +44,9 @@ class RopePlotter(object):
         # Set starting point
         self.set_control_zeroes()
 
+        # TODO:
+        # Zero normal penlifter motor with stall speed.
+
         # Chalk extruder startup
         self.chalk = chalk
         if chalk:

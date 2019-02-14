@@ -201,6 +201,7 @@ class PIDControl(object):
 
 
 class PIDMotor(ev3.Motor):
+    # Todo: add max-speed.
     def __init__(self, port=None, name='*', Kp=3.0, Ki=0.0, Kd=0.0, brake=0, verbose=False, speed_reg=False, **kwargs):
         ev3.Motor.__init__(self, port, name)
         self.positionPID = PIDControl(Kp=Kp, Ti=Ki, Td=Kd, max_out=100)

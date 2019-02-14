@@ -24,6 +24,7 @@ a web interface with tornado. The video is done with the BrickPi branch of this 
 sudo apt-get install build-essential python3-dev
 git clone https://github.com/tornadoweb/tornado
 cd tornado
+git checkout branch5.1
 python3 setup.py build
 sudo python3 setup.py install
 ```
