@@ -1,9 +1,9 @@
 MOTOR_CMD_RATE = 20             # Max number of motor commands per second
-L_ROPE_0 = 65                 # Length of left rope in cm when pen is at 0,0 (top left)
-R_ROPE_0 = 87.5               # same for right rope
-ROPE_ATTACHMENT_WIDTH = 90    # space between the two attachment points of the plotter.In my case: door width. In cm.
+L_ROPE_0 = 53.6                 # Length of left rope in cm when pen is at 0,0 (top left)
+R_ROPE_0 = 72.8               # same for right rope
+ROPE_ATTACHMENT_WIDTH = 75    # space between the two attachment points of the plotter.In my case: door width. In cm.
 CM_TO_DEG = -170                # -170 is for dental floss on a simple bush, -614 is for racecar wheels.
-KP = 1                          # 1.5 is for a direct drive on a bush. 2 is for a worm gear.
+KP = 2.5                          # 1.5 is for a direct drive on a bush. 2 is for a worm gear.
 TI = 0
 TD = 0
 MAX_SPEED = 100

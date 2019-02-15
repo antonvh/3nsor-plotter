@@ -276,12 +276,12 @@ class RopePlotter(object):
             self.pen_down()
 
             # Wiggle
-            self.left_motor.run_to_rel_pos(position_sp=120)
+            self.left_motor.run_to_rel_pos(position_sp=40)
             self.pen_up()
-            self.left_motor.run_to_rel_pos(position_sp=-60)
-            self.right_motor.run_to_rel_pos(position_sp=-60)
+            self.left_motor.run_to_rel_pos(position_sp=-20)
+            self.right_motor.run_to_rel_pos(position_sp=-20)
             self.pen_down()
-            self.right_motor.run_to_rel_pos(position_sp=120)
+            self.right_motor.run_to_rel_pos(position_sp=40)
             self.pen_up()
 
             yield float(i + 1) / num_coords * 100
