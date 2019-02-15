@@ -334,7 +334,7 @@ class MotorThread(threading.Thread):
                 start_time = time.time()
                 wsSend("Plotting crosses")
                 # c stays 'plot' until another command is sent trough the socket
-                plot_action = plotter.plot_crosses()
+                plot_action = plotter.plot_crosses('uploads/coords.csv')
                 c = 'plotting'
 
             elif c == 'plotwaves':
