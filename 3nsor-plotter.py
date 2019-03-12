@@ -323,25 +323,6 @@ class MotorThread(threading.Thread):
                 wsSend("zero motor positions")
                 plotter.set_control_zeroes()
                 c = ''
-            elif c == 'plotcircles':
-                start_time = time.time()
-                wsSend("Plotting circles")
-                # c stays 'plot' until another command is sent trough the socket
-                plot_action = plotter.optimized_etch()
-                c = 'plotting'
-
-            elif c == 'plot_crosses':
-                start_time = time.time()
-                wsSend("Plotting crosses")
-                # c stays 'plot' until another command is sent trough the socket
-                plot_action = plotter.plot_crosses('uploads/coords.csv')
-                c = 'plotting'
-
-            elif c == 'plotwaves':
-                wsSend("Plotting waves")
-                # c stays 'plot' until another command is sent trough the socket
-                plot_action = plotter.plot_circle_waves()
-                c = 'plotting'
 
             # Button commands
             if buttons.backspace:
